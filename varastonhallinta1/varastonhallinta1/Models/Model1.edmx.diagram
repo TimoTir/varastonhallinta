@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3918f9671ab94c8eb1a0e6758205dc6c" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="naytto1Model.Asiakkaat" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="naytto1Model.Henkilöstö" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="naytto1Model.Logins" Width="1.5" PointX="12.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="naytto1Model.Roolit" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="naytto1Model.sysdiagrams" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="naytto1Model.Tilaukset" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="naytto1Model.Toimittajat" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="naytto1Model.Tuotteet" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="naytto1Model.VarastoSaldot" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="naytto1Model.FK_Tilaukset_Asiakkaat" ManuallyRouted="false" />
+        <AssociationConnector Association="naytto1Model.FK_Henkilöstö_Roolit" ManuallyRouted="false" />
+        <AssociationConnector Association="naytto1Model.FK_Logins_Henkilöstö" ManuallyRouted="false" />
+        <AssociationConnector Association="naytto1Model.FK_Tilaukset_Tuotteet" ManuallyRouted="false" />
+        <AssociationConnector Association="naytto1Model.FK_Tuotteet_Toimittajat" ManuallyRouted="false" />
+        <AssociationConnector Association="naytto1Model.FK_VarastoSaldot_Tuotteet" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,541 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="naytto1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asiakkaat">
+          <Key>
+            <PropertyRef Name="AsiakasID" />
+          </Key>
+          <Property Name="AsiakasID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YritysNimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="YhteysHenkilö" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Puhelin" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Sähköposti" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Henkilöstö">
+          <Key>
+            <PropertyRef Name="HenkilöID" />
+          </Key>
+          <Property Name="HenkilöID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Etunimi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sukunimi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Puhelin" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Sähköposti" Type="varchar" MaxLength="25" />
+          <Property Name="RooliID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Logins">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Käyttäjätunnus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salasana" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HenkilöID" Type="int" />
+        </EntityType>
+        <EntityType Name="Roolit">
+          <Key>
+            <PropertyRef Name="RooliID" />
+          </Key>
+          <Property Name="RooliID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Roolinimi" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tilaukset">
+          <Key>
+            <PropertyRef Name="TilausID" />
+          </Key>
+          <Property Name="TilausID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TuoteID" Type="int" />
+          <Property Name="Määrä" Type="int" />
+          <Property Name="AsiakasID" Type="int" />
+        </EntityType>
+        <EntityType Name="Toimittajat">
+          <Key>
+            <PropertyRef Name="ToimittajaID" />
+          </Key>
+          <Property Name="ToimittajaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YritysNmi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="YhteysHenkilö" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Puhelin" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tuotteet">
+          <Key>
+            <PropertyRef Name="TuoteID" />
+          </Key>
+          <Property Name="TuoteID" Type="int" Nullable="false" />
+          <Property Name="TuoteNimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TuoteMalli" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sarjanumero" Type="nvarchar" MaxLength="50" />
+          <Property Name="Määrä" Type="varchar" MaxLength="15" />
+          <Property Name="ToimittajaID" Type="int" />
+          <Property Name="TuoteLuokittelu" Type="int" />
+          <Property Name="VastanottoPvm" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VarastoSaldot">
+          <Key>
+            <PropertyRef Name="VarastoID" />
+          </Key>
+          <Property Name="VarastoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TuoteID" Type="int" />
+          <Property Name="Tuotemerkki" Type="nvarchar" MaxLength="50" />
+          <Property Name="Määrä" Type="int" />
+          <Property Name="VarastoPaikka" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Henkilöstö_Roolit">
+          <End Role="Roolit" Type="Self.Roolit" Multiplicity="1" />
+          <End Role="Henkilöstö" Type="Self.Henkilöstö" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roolit">
+              <PropertyRef Name="RooliID" />
+            </Principal>
+            <Dependent Role="Henkilöstö">
+              <PropertyRef Name="RooliID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logins_Henkilöstö">
+          <End Role="Henkilöstö" Type="Self.Henkilöstö" Multiplicity="1" />
+          <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Henkilöstö">
+              <PropertyRef Name="HenkilöID" />
+            </Principal>
+            <Dependent Role="Logins">
+              <PropertyRef Name="LoginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tilaukset_Asiakkaat">
+          <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="0..1" />
+          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiakkaat">
+              <PropertyRef Name="AsiakasID" />
+            </Principal>
+            <Dependent Role="Tilaukset">
+              <PropertyRef Name="AsiakasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tilaukset_Tuotteet">
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="0..1" />
+          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tuotteet">
+              <PropertyRef Name="TuoteID" />
+            </Principal>
+            <Dependent Role="Tilaukset">
+              <PropertyRef Name="TuoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuotteet_Toimittajat">
+          <End Role="Toimittajat" Type="Self.Toimittajat" Multiplicity="0..1" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Toimittajat">
+              <PropertyRef Name="ToimittajaID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="ToimittajaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VarastoSaldot_Tuotteet">
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="0..1" />
+          <End Role="VarastoSaldot" Type="Self.VarastoSaldot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tuotteet">
+              <PropertyRef Name="TuoteID" />
+            </Principal>
+            <Dependent Role="VarastoSaldot">
+              <PropertyRef Name="TuoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="naytto1ModelStoreContainer">
+          <EntitySet Name="Asiakkaat" EntityType="Self.Asiakkaat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Henkilöstö" EntityType="Self.Henkilöstö" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roolit" EntityType="Self.Roolit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tilaukset" EntityType="Self.Tilaukset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Toimittajat" EntityType="Self.Toimittajat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VarastoSaldot" EntityType="Self.VarastoSaldot" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Henkilöstö_Roolit" Association="Self.FK_Henkilöstö_Roolit">
+            <End Role="Roolit" EntitySet="Roolit" />
+            <End Role="Henkilöstö" EntitySet="Henkilöstö" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logins_Henkilöstö" Association="Self.FK_Logins_Henkilöstö">
+            <End Role="Henkilöstö" EntitySet="Henkilöstö" />
+            <End Role="Logins" EntitySet="Logins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilaukset_Asiakkaat" Association="Self.FK_Tilaukset_Asiakkaat">
+            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilaukset_Tuotteet" Association="Self.FK_Tilaukset_Tuotteet">
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuotteet_Toimittajat" Association="Self.FK_Tuotteet_Toimittajat">
+            <End Role="Toimittajat" EntitySet="Toimittajat" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VarastoSaldot_Tuotteet" Association="Self.FK_VarastoSaldot_Tuotteet">
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+            <End Role="VarastoSaldot" EntitySet="VarastoSaldot" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="naytto1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asiakkaat">
+          <Key>
+            <PropertyRef Name="AsiakasID" />
+          </Key>
+          <Property Name="AsiakasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YritysNimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="YhteysHenkilö" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Puhelin" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sähköposti" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilaukset_Asiakkaat" FromRole="Asiakkaat" ToRole="Tilaukset" />
+        </EntityType>
+        <EntityType Name="Henkilöstö">
+          <Key>
+            <PropertyRef Name="HenkilöID" />
+          </Key>
+          <Property Name="HenkilöID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Etunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sukunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Puhelin" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sähköposti" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="RooliID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Roolit" Relationship="Self.FK_Henkilöstö_Roolit" FromRole="Henkilöstö" ToRole="Roolit" />
+          <NavigationProperty Name="Logins" Relationship="Self.FK_Logins_Henkilöstö" FromRole="Henkilöstö" ToRole="Logins" />
+        </EntityType>
+        <EntityType Name="Logins">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Käyttäjätunnus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salasana" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HenkilöID" Type="Int32" />
+          <NavigationProperty Name="Henkilöstö" Relationship="Self.FK_Logins_Henkilöstö" FromRole="Logins" ToRole="Henkilöstö" />
+        </EntityType>
+        <EntityType Name="Roolit">
+          <Key>
+            <PropertyRef Name="RooliID" />
+          </Key>
+          <Property Name="RooliID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Roolinimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Henkilöstö" Relationship="Self.FK_Henkilöstö_Roolit" FromRole="Roolit" ToRole="Henkilöstö" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tilaukset">
+          <Key>
+            <PropertyRef Name="TilausID" />
+          </Key>
+          <Property Name="TilausID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TuoteID" Type="Int32" />
+          <Property Name="Määrä" Type="Int32" />
+          <Property Name="AsiakasID" Type="Int32" />
+          <NavigationProperty Name="Asiakkaat" Relationship="Self.FK_Tilaukset_Asiakkaat" FromRole="Tilaukset" ToRole="Asiakkaat" />
+          <NavigationProperty Name="Tuotteet" Relationship="Self.FK_Tilaukset_Tuotteet" FromRole="Tilaukset" ToRole="Tuotteet" />
+        </EntityType>
+        <EntityType Name="Toimittajat">
+          <Key>
+            <PropertyRef Name="ToimittajaID" />
+          </Key>
+          <Property Name="ToimittajaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YritysNmi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="YhteysHenkilö" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Puhelin" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tuotteet" Relationship="Self.FK_Tuotteet_Toimittajat" FromRole="Toimittajat" ToRole="Tuotteet" />
+        </EntityType>
+        <EntityType Name="Tuotteet">
+          <Key>
+            <PropertyRef Name="TuoteID" />
+          </Key>
+          <Property Name="TuoteID" Type="Int32" Nullable="false" />
+          <Property Name="TuoteNimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TuoteMalli" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sarjanumero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Määrä" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ToimittajaID" Type="Int32" />
+          <Property Name="TuoteLuokittelu" Type="Int32" />
+          <Property Name="VastanottoPvm" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilaukset_Tuotteet" FromRole="Tuotteet" ToRole="Tilaukset" />
+          <NavigationProperty Name="Toimittajat" Relationship="Self.FK_Tuotteet_Toimittajat" FromRole="Tuotteet" ToRole="Toimittajat" />
+          <NavigationProperty Name="VarastoSaldot" Relationship="Self.FK_VarastoSaldot_Tuotteet" FromRole="Tuotteet" ToRole="VarastoSaldot" />
+        </EntityType>
+        <EntityType Name="VarastoSaldot">
+          <Key>
+            <PropertyRef Name="VarastoID" />
+          </Key>
+          <Property Name="VarastoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TuoteID" Type="Int32" />
+          <Property Name="Tuotemerkki" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Määrä" Type="Int32" />
+          <Property Name="VarastoPaikka" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tuotteet" Relationship="Self.FK_VarastoSaldot_Tuotteet" FromRole="VarastoSaldot" ToRole="Tuotteet" />
+        </EntityType>
+        <Association Name="FK_Tilaukset_Asiakkaat">
+          <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="0..1" />
+          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiakkaat">
+              <PropertyRef Name="AsiakasID" />
+            </Principal>
+            <Dependent Role="Tilaukset">
+              <PropertyRef Name="AsiakasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Henkilöstö_Roolit">
+          <End Role="Roolit" Type="Self.Roolit" Multiplicity="1" />
+          <End Role="Henkilöstö" Type="Self.Henkilöstö" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roolit">
+              <PropertyRef Name="RooliID" />
+            </Principal>
+            <Dependent Role="Henkilöstö">
+              <PropertyRef Name="RooliID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logins_Henkilöstö">
+          <End Role="Henkilöstö" Type="Self.Henkilöstö" Multiplicity="1" />
+          <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Henkilöstö">
+              <PropertyRef Name="HenkilöID" />
+            </Principal>
+            <Dependent Role="Logins">
+              <PropertyRef Name="LoginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tilaukset_Tuotteet">
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="0..1" />
+          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tuotteet">
+              <PropertyRef Name="TuoteID" />
+            </Principal>
+            <Dependent Role="Tilaukset">
+              <PropertyRef Name="TuoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuotteet_Toimittajat">
+          <End Role="Toimittajat" Type="Self.Toimittajat" Multiplicity="0..1" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Toimittajat">
+              <PropertyRef Name="ToimittajaID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="ToimittajaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VarastoSaldot_Tuotteet">
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="0..1" />
+          <End Role="VarastoSaldot" Type="Self.VarastoSaldot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tuotteet">
+              <PropertyRef Name="TuoteID" />
+            </Principal>
+            <Dependent Role="VarastoSaldot">
+              <PropertyRef Name="TuoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="naytto1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asiakkaat" EntityType="Self.Asiakkaat" />
+          <EntitySet Name="Henkilöstö" EntityType="Self.Henkilöstö" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" />
+          <EntitySet Name="Roolit" EntityType="Self.Roolit" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tilaukset" EntityType="Self.Tilaukset" />
+          <EntitySet Name="Toimittajat" EntityType="Self.Toimittajat" />
+          <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" />
+          <EntitySet Name="VarastoSaldot" EntityType="Self.VarastoSaldot" />
+          <AssociationSet Name="FK_Tilaukset_Asiakkaat" Association="Self.FK_Tilaukset_Asiakkaat">
+            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Henkilöstö_Roolit" Association="Self.FK_Henkilöstö_Roolit">
+            <End Role="Roolit" EntitySet="Roolit" />
+            <End Role="Henkilöstö" EntitySet="Henkilöstö" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logins_Henkilöstö" Association="Self.FK_Logins_Henkilöstö">
+            <End Role="Henkilöstö" EntitySet="Henkilöstö" />
+            <End Role="Logins" EntitySet="Logins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilaukset_Tuotteet" Association="Self.FK_Tilaukset_Tuotteet">
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuotteet_Toimittajat" Association="Self.FK_Tuotteet_Toimittajat">
+            <End Role="Toimittajat" EntitySet="Toimittajat" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VarastoSaldot_Tuotteet" Association="Self.FK_VarastoSaldot_Tuotteet">
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+            <End Role="VarastoSaldot" EntitySet="VarastoSaldot" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="naytto1ModelStoreContainer" CdmEntityContainer="naytto1Entities">
+          <EntitySetMapping Name="Asiakkaat">
+            <EntityTypeMapping TypeName="naytto1Model.Asiakkaat">
+              <MappingFragment StoreEntitySet="Asiakkaat">
+                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+                <ScalarProperty Name="YritysNimi" ColumnName="YritysNimi" />
+                <ScalarProperty Name="YhteysHenkilö" ColumnName="YhteysHenkilö" />
+                <ScalarProperty Name="Puhelin" ColumnName="Puhelin" />
+                <ScalarProperty Name="Sähköposti" ColumnName="Sähköposti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Henkilöstö">
+            <EntityTypeMapping TypeName="naytto1Model.Henkilöstö">
+              <MappingFragment StoreEntitySet="Henkilöstö">
+                <ScalarProperty Name="HenkilöID" ColumnName="HenkilöID" />
+                <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
+                <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
+                <ScalarProperty Name="Puhelin" ColumnName="Puhelin" />
+                <ScalarProperty Name="Sähköposti" ColumnName="Sähköposti" />
+                <ScalarProperty Name="RooliID" ColumnName="RooliID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="naytto1Model.Logins">
+              <MappingFragment StoreEntitySet="Logins">
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="Käyttäjätunnus" ColumnName="Käyttäjätunnus" />
+                <ScalarProperty Name="Salasana" ColumnName="Salasana" />
+                <ScalarProperty Name="HenkilöID" ColumnName="HenkilöID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roolit">
+            <EntityTypeMapping TypeName="naytto1Model.Roolit">
+              <MappingFragment StoreEntitySet="Roolit">
+                <ScalarProperty Name="RooliID" ColumnName="RooliID" />
+                <ScalarProperty Name="Roolinimi" ColumnName="Roolinimi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="naytto1Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tilaukset">
+            <EntityTypeMapping TypeName="naytto1Model.Tilaukset">
+              <MappingFragment StoreEntitySet="Tilaukset">
+                <ScalarProperty Name="TilausID" ColumnName="TilausID" />
+                <ScalarProperty Name="TuoteID" ColumnName="TuoteID" />
+                <ScalarProperty Name="Määrä" ColumnName="Määrä" />
+                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Toimittajat">
+            <EntityTypeMapping TypeName="naytto1Model.Toimittajat">
+              <MappingFragment StoreEntitySet="Toimittajat">
+                <ScalarProperty Name="ToimittajaID" ColumnName="ToimittajaID" />
+                <ScalarProperty Name="YritysNmi" ColumnName="YritysNmi" />
+                <ScalarProperty Name="YhteysHenkilö" ColumnName="YhteysHenkilö" />
+                <ScalarProperty Name="Puhelin" ColumnName="Puhelin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tuotteet">
+            <EntityTypeMapping TypeName="naytto1Model.Tuotteet">
+              <MappingFragment StoreEntitySet="Tuotteet">
+                <ScalarProperty Name="TuoteID" ColumnName="TuoteID" />
+                <ScalarProperty Name="TuoteNimi" ColumnName="TuoteNimi" />
+                <ScalarProperty Name="TuoteMalli" ColumnName="TuoteMalli" />
+                <ScalarProperty Name="Sarjanumero" ColumnName="Sarjanumero" />
+                <ScalarProperty Name="Määrä" ColumnName="Määrä" />
+                <ScalarProperty Name="ToimittajaID" ColumnName="ToimittajaID" />
+                <ScalarProperty Name="TuoteLuokittelu" ColumnName="TuoteLuokittelu" />
+                <ScalarProperty Name="VastanottoPvm" ColumnName="VastanottoPvm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VarastoSaldot">
+            <EntityTypeMapping TypeName="naytto1Model.VarastoSaldot">
+              <MappingFragment StoreEntitySet="VarastoSaldot">
+                <ScalarProperty Name="VarastoID" ColumnName="VarastoID" />
+                <ScalarProperty Name="TuoteID" ColumnName="TuoteID" />
+                <ScalarProperty Name="Tuotemerkki" ColumnName="Tuotemerkki" />
+                <ScalarProperty Name="Määrä" ColumnName="Määrä" />
+                <ScalarProperty Name="VarastoPaikka" ColumnName="VarastoPaikka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
