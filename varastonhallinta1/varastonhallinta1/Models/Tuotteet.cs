@@ -11,8 +11,7 @@ namespace varastonhallinta1.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Tuotteet
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,17 +20,13 @@ namespace varastonhallinta1.Models
             this.Tilaukset = new HashSet<Tilaukset>();
             this.VarastoSaldot = new HashSet<VarastoSaldot>();
         }
-        [Key]
-
+    
         public int TuoteID { get; set; }
         public string TuoteMerkki { get; set; }
         public string TuoteMalli { get; set; }
         public string Sarjanumero { get; set; }
         public string Määrä { get; set; }
         public Nullable<int> ToimittajaID { get; set; }
-        [Display(Name = "Päivämäärä")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [DataType(DataType.Date)]
         public System.DateTime VastanottoPvm { get; set; }
         public Nullable<int> LuokitteluID { get; set; }
     

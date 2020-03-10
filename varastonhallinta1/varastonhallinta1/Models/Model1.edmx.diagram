@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="naytto1Model.Logins" Width="1.5" PointX="12.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="naytto1Model.Roolit" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="naytto1Model.sysdiagrams" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="naytto1Model.Tilaukset" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="naytto1Model.Tilaukset" Width="1.5" PointX="5.875" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="naytto1Model.Toimittajat" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="naytto1Model.Tuotteet" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="naytto1Model.VarastoSaldot" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
