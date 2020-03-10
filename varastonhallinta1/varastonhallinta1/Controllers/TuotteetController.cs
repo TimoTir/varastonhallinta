@@ -48,7 +48,7 @@ namespace varastonhallinta1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TuoteID,TuoteMerkki,TuoteMalli,Sarjanumero,Määrä,ToimittajaID,LuokitteluID,VastanottoPvm")] Tuotteet tuotteet)
+        public ActionResult Create([Bind(Include = "TuoteID,TuoteMerkki,TuoteMalli,Sarjanumero,Määrä,ToimittajaID,Tuoteluokittelu,VastanottoPvm")] Tuotteet tuotteet)
         {
             if (ModelState.IsValid)
             {
