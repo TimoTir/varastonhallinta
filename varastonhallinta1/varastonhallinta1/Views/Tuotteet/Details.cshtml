@@ -1,0 +1,74 @@
+﻿@model varastonhallinta1.Models.Tuotteet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tuotteet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TuoteMerkki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TuoteMerkki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TuoteMalli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TuoteMalli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sarjanumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sarjanumero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Määrä)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Määrä)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LuokitteluID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuokitteluID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VastanottoPvm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VastanottoPvm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Toimittajat.YritysNmi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Toimittajat.YritysNmi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TuoteID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

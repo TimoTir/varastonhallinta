@@ -129,6 +129,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ToimittajatController.cs" />
+    <Compile Include="Controllers\TuoteLuokitteluController.cs" />
+    <Compile Include="Controllers\TuotteetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -168,6 +171,9 @@
     <Compile Include="Models\Toimittajat.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TuoteLuokittelu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Tuotteet.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -187,8 +193,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -229,6 +235,26 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Henkilöstö\Create.cshtml" />
+    <Content Include="Views\Henkilöstö\Delete.cshtml" />
+    <Content Include="Views\Henkilöstö\Details.cshtml" />
+    <Content Include="Views\Henkilöstö\Edit.cshtml" />
+    <Content Include="Views\Henkilöstö\Index.cshtml" />
+    <Content Include="Views\Tuotteet\Create.cshtml" />
+    <Content Include="Views\Tuotteet\Delete.cshtml" />
+    <Content Include="Views\Tuotteet\Details.cshtml" />
+    <Content Include="Views\Tuotteet\Edit.cshtml" />
+    <Content Include="Views\Tuotteet\Index.cshtml" />
+    <Content Include="Views\Toimittajat\Create.cshtml" />
+    <Content Include="Views\Toimittajat\Delete.cshtml" />
+    <Content Include="Views\Toimittajat\Details.cshtml" />
+    <Content Include="Views\Toimittajat\Edit.cshtml" />
+    <Content Include="Views\Toimittajat\Index.cshtml" />
+    <Content Include="Views\TuoteLuokittelu\Create.cshtml" />
+    <Content Include="Views\TuoteLuokittelu\Delete.cshtml" />
+    <Content Include="Views\TuoteLuokittelu\Details.cshtml" />
+    <Content Include="Views\TuoteLuokittelu\Edit.cshtml" />
+    <Content Include="Views\TuoteLuokittelu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

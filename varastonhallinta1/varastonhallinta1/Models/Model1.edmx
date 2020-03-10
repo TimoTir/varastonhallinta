@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="naytto1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="naytto1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asiakkaat">
           <Key>
             <PropertyRef Name="AsiakasID" />
@@ -70,17 +70,24 @@
           <Property Name="YhteysHenkilö" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Puhelin" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
+        <EntityType Name="TuoteLuokittelu">
+          <Key>
+            <PropertyRef Name="LuokitteluID" />
+          </Key>
+          <Property Name="LuokitteluID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TuoteLuokka" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Tuotteet">
           <Key>
             <PropertyRef Name="TuoteID" />
           </Key>
-          <Property Name="TuoteID" Type="int" Nullable="false" />
-          <Property Name="TuoteNimi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TuoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TuoteMerkki" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TuoteMalli" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Sarjanumero" Type="nvarchar" MaxLength="50" />
           <Property Name="Määrä" Type="varchar" MaxLength="15" />
           <Property Name="ToimittajaID" Type="int" />
-          <Property Name="TuoteLuokittelu" Type="int" />
+          <Property Name="LuokitteluID" Type="int" />
           <Property Name="VastanottoPvm" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="VarastoSaldot">
@@ -153,6 +160,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tuotteet_TuoteLuokittelu">
+          <End Role="TuoteLuokittelu" Type="Self.TuoteLuokittelu" Multiplicity="0..1" />
+          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuoteLuokittelu">
+              <PropertyRef Name="LuokitteluID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="LuokitteluID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_VarastoSaldot_Tuotteet">
           <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="0..1" />
           <End Role="VarastoSaldot" Type="Self.VarastoSaldot" Multiplicity="*" />
@@ -173,6 +192,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tilaukset" EntityType="Self.Tilaukset" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Toimittajat" EntityType="Self.Toimittajat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TuoteLuokittelu" EntityType="Self.TuoteLuokittelu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VarastoSaldot" EntityType="Self.VarastoSaldot" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Henkilöstö_Roolit" Association="Self.FK_Henkilöstö_Roolit">
@@ -195,13 +215,16 @@
             <End Role="Toimittajat" EntitySet="Toimittajat" />
             <End Role="Tuotteet" EntitySet="Tuotteet" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tuotteet_TuoteLuokittelu" Association="Self.FK_Tuotteet_TuoteLuokittelu">
+            <End Role="TuoteLuokittelu" EntitySet="TuoteLuokittelu" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
           <AssociationSet Name="FK_VarastoSaldot_Tuotteet" Association="Self.FK_VarastoSaldot_Tuotteet">
             <End Role="Tuotteet" EntitySet="Tuotteet" />
             <End Role="VarastoSaldot" EntitySet="VarastoSaldot" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="naytto1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -283,16 +306,17 @@
             <PropertyRef Name="TuoteID" />
           </Key>
           <Property Name="TuoteID" Type="Int32" Nullable="false" />
-          <Property Name="TuoteNimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TuoteMerkki" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TuoteMalli" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Sarjanumero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Määrä" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="ToimittajaID" Type="Int32" />
-          <Property Name="TuoteLuokittelu" Type="Int32" />
           <Property Name="VastanottoPvm" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilaukset_Tuotteet" FromRole="Tuotteet" ToRole="Tilaukset" />
           <NavigationProperty Name="Toimittajat" Relationship="Self.FK_Tuotteet_Toimittajat" FromRole="Tuotteet" ToRole="Toimittajat" />
           <NavigationProperty Name="VarastoSaldot" Relationship="Self.FK_VarastoSaldot_Tuotteet" FromRole="Tuotteet" ToRole="VarastoSaldot" />
+          <Property Name="LuokitteluID" Type="Int32" />
+          <NavigationProperty Name="TuoteLuokittelu" Relationship="naytto1Model.FK_Tuotteet_TuoteLuokittelu" FromRole="Tuotteet" ToRole="TuoteLuokittelu" />
         </EntityType>
         <EntityType Name="VarastoSaldot">
           <Key>
@@ -377,7 +401,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="naytto1Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="naytto1Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Asiakkaat" EntityType="Self.Asiakkaat" />
           <EntitySet Name="Henkilöstö" EntityType="Self.Henkilöstö" />
           <EntitySet Name="Logins" EntityType="Self.Logins" />
@@ -411,13 +435,38 @@
             <End Role="Tuotteet" EntitySet="Tuotteet" />
             <End Role="VarastoSaldot" EntitySet="VarastoSaldot" />
           </AssociationSet>
+          <EntitySet Name="TuoteLuokittelu" EntityType="naytto1Model.TuoteLuokittelu" />
+          <AssociationSet Name="FK_Tuotteet_TuoteLuokittelu" Association="naytto1Model.FK_Tuotteet_TuoteLuokittelu">
+            <End Role="TuoteLuokittelu" EntitySet="TuoteLuokittelu" />
+            <End Role="Tuotteet" EntitySet="Tuotteet" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="TuoteLuokittelu">
+          <Key>
+            <PropertyRef Name="LuokitteluID" />
+          </Key>
+          <Property Name="LuokitteluID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TuoteLuokka" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tuotteet" Relationship="naytto1Model.FK_Tuotteet_TuoteLuokittelu" FromRole="TuoteLuokittelu" ToRole="Tuotteet" />
+        </EntityType>
+        <Association Name="FK_Tuotteet_TuoteLuokittelu">
+          <End Type="naytto1Model.TuoteLuokittelu" Role="TuoteLuokittelu" Multiplicity="0..1" />
+          <End Type="naytto1Model.Tuotteet" Role="Tuotteet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuoteLuokittelu">
+              <PropertyRef Name="LuokitteluID" />
+            </Principal>
+            <Dependent Role="Tuotteet">
+              <PropertyRef Name="LuokitteluID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="naytto1ModelStoreContainer" CdmEntityContainer="naytto1Entities">
+        <EntityContainerMapping StorageEntityContainer="naytto1ModelStoreContainer" CdmEntityContainer="naytto1Entities1">
           <EntitySetMapping Name="Asiakkaat">
             <EntityTypeMapping TypeName="naytto1Model.Asiakkaat">
               <MappingFragment StoreEntitySet="Asiakkaat">
@@ -493,13 +542,13 @@
           <EntitySetMapping Name="Tuotteet">
             <EntityTypeMapping TypeName="naytto1Model.Tuotteet">
               <MappingFragment StoreEntitySet="Tuotteet">
+                <ScalarProperty Name="TuoteMerkki" ColumnName="TuoteMerkki" />
+                <ScalarProperty Name="LuokitteluID" ColumnName="LuokitteluID" />
                 <ScalarProperty Name="TuoteID" ColumnName="TuoteID" />
-                <ScalarProperty Name="TuoteNimi" ColumnName="TuoteNimi" />
                 <ScalarProperty Name="TuoteMalli" ColumnName="TuoteMalli" />
                 <ScalarProperty Name="Sarjanumero" ColumnName="Sarjanumero" />
                 <ScalarProperty Name="Määrä" ColumnName="Määrä" />
                 <ScalarProperty Name="ToimittajaID" ColumnName="ToimittajaID" />
-                <ScalarProperty Name="TuoteLuokittelu" ColumnName="TuoteLuokittelu" />
                 <ScalarProperty Name="VastanottoPvm" ColumnName="VastanottoPvm" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -512,6 +561,14 @@
                 <ScalarProperty Name="Tuotemerkki" ColumnName="Tuotemerkki" />
                 <ScalarProperty Name="Määrä" ColumnName="Määrä" />
                 <ScalarProperty Name="VarastoPaikka" ColumnName="VarastoPaikka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TuoteLuokittelu">
+            <EntityTypeMapping TypeName="naytto1Model.TuoteLuokittelu">
+              <MappingFragment StoreEntitySet="TuoteLuokittelu">
+                <ScalarProperty Name="TuoteLuokka" ColumnName="TuoteLuokka" />
+                <ScalarProperty Name="LuokitteluID" ColumnName="LuokitteluID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

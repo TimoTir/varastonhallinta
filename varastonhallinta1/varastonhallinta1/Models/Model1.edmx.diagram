@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3918f9671ab94c8eb1a0e6758205dc6c" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="975ee93772924cc0b0baff4be39b0b98" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="naytto1Model.Asiakkaat" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="naytto1Model.Henkilöstö" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="naytto1Model.Logins" Width="1.5" PointX="12.25" PointY="1.25" IsExpanded="true" />
@@ -20,6 +20,8 @@
         <AssociationConnector Association="naytto1Model.FK_Tilaukset_Tuotteet" ManuallyRouted="false" />
         <AssociationConnector Association="naytto1Model.FK_Tuotteet_Toimittajat" ManuallyRouted="false" />
         <AssociationConnector Association="naytto1Model.FK_VarastoSaldot_Tuotteet" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="naytto1Model.TuoteLuokittelu" Width="1.5" PointX="7.375" PointY="7.875" />
+        <AssociationConnector Association="naytto1Model.FK_Tuotteet_TuoteLuokittelu" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

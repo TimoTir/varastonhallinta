@@ -1,0 +1,75 @@
+﻿@model IEnumerable<varastonhallinta1.Models.Tuotteet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TuoteID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TuoteMerkki)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TuoteMalli)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sarjanumero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Määrä)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LuokitteluID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VastanottoPvm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Toimittajat.YritysNmi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TuoteID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TuoteMerkki)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TuoteMalli)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sarjanumero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Määrä)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TuoteLuokittelu.LuokitteluID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VastanottoPvm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Toimittajat.YritysNmi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TuoteID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TuoteID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TuoteID })
+        </td>
+    </tr>
+}
+
+</table>

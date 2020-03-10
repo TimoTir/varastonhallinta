@@ -1,0 +1,34 @@
+﻿@model varastonhallinta1.Models.TuoteLuokittelu
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TuoteLuokittelu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TuoteLuokka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TuoteLuokka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LuokitteluID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuokitteluID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LuokitteluID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

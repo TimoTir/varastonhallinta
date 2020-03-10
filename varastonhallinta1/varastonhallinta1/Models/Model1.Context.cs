@@ -13,10 +13,10 @@ namespace varastonhallinta1.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class naytto1Entities : DbContext
+    public partial class naytto1Entities1 : DbContext
     {
-        public naytto1Entities()
-            : base("name=naytto1Entities")
+        public naytto1Entities1()
+            : base("name=naytto1Entities1")
         {
         }
     
@@ -34,5 +34,6 @@ namespace varastonhallinta1.Models
         public virtual DbSet<Toimittajat> Toimittajat { get; set; }
         public virtual DbSet<Tuotteet> Tuotteet { get; set; }
         public virtual DbSet<VarastoSaldot> VarastoSaldot { get; set; }
+        public virtual DbSet<TuoteLuokittelu> TuoteLuokittelu { get; set; }
     }
 }

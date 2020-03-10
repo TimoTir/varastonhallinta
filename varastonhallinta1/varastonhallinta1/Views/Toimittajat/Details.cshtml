@@ -1,0 +1,42 @@
+﻿@model varastonhallinta1.Models.Toimittajat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Toimittajat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.YritysNmi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YritysNmi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YhteysHenkilö)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YhteysHenkilö)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Puhelin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Puhelin)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ToimittajaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
