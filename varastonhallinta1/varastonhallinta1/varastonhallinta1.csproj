@@ -128,10 +128,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AsiakkaatController.cs" />
+    <Compile Include="Controllers\HenkilöstöController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginsController.cs" />
+    <Compile Include="Controllers\RoolitController.cs" />
+    <Compile Include="Controllers\TilauksetController.cs" />
     <Compile Include="Controllers\ToimittajatController.cs" />
     <Compile Include="Controllers\TuoteLuokitteluController.cs" />
     <Compile Include="Controllers\TuotteetController.cs" />
+    <Compile Include="Controllers\VarastoSaldotController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -255,6 +261,31 @@
     <Content Include="Views\TuoteLuokittelu\Details.cshtml" />
     <Content Include="Views\TuoteLuokittelu\Edit.cshtml" />
     <Content Include="Views\TuoteLuokittelu\Index.cshtml" />
+    <Content Include="Views\Asiakkaat\Create.cshtml" />
+    <Content Include="Views\Asiakkaat\Delete.cshtml" />
+    <Content Include="Views\Asiakkaat\Details.cshtml" />
+    <Content Include="Views\Asiakkaat\Edit.cshtml" />
+    <Content Include="Views\Asiakkaat\Index.cshtml" />
+    <Content Include="Views\Roolit\Create.cshtml" />
+    <Content Include="Views\Roolit\Delete.cshtml" />
+    <Content Include="Views\Roolit\Details.cshtml" />
+    <Content Include="Views\Roolit\Edit.cshtml" />
+    <Content Include="Views\Roolit\Index.cshtml" />
+    <Content Include="Views\Tilaukset\Create.cshtml" />
+    <Content Include="Views\Tilaukset\Delete.cshtml" />
+    <Content Include="Views\Tilaukset\Details.cshtml" />
+    <Content Include="Views\Tilaukset\Edit.cshtml" />
+    <Content Include="Views\Tilaukset\Index.cshtml" />
+    <Content Include="Views\VarastoSaldot\Create.cshtml" />
+    <Content Include="Views\VarastoSaldot\Delete.cshtml" />
+    <Content Include="Views\VarastoSaldot\Details.cshtml" />
+    <Content Include="Views\VarastoSaldot\Edit.cshtml" />
+    <Content Include="Views\VarastoSaldot\Index.cshtml" />
+    <Content Include="Views\Logins\Create.cshtml" />
+    <Content Include="Views\Logins\Delete.cshtml" />
+    <Content Include="Views\Logins\Details.cshtml" />
+    <Content Include="Views\Logins\Edit.cshtml" />
+    <Content Include="Views\Logins\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

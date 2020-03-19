@@ -1,0 +1,56 @@
+﻿@model varastonhallinta1.Models.VarastoSaldot
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>VarastoSaldot</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tuotemerkki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tuotemerkki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Määrä)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Määrä)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VarastoPaikka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VarastoPaikka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tuotteet.TuoteMerkki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tuotteet.TuoteMerkki)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

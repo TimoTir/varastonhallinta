@@ -1,0 +1,45 @@
+﻿@model IEnumerable<varastonhallinta1.Models.Logins>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Käyttäjätunnus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salasana)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HenkilöID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Käyttäjätunnus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salasana)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HenkilöID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LoginID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LoginID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LoginID })
+        </td>
+    </tr>
+}
+
+</table>

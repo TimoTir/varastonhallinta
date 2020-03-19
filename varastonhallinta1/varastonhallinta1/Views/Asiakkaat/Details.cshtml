@@ -1,0 +1,50 @@
+﻿@model varastonhallinta1.Models.Asiakkaat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Asiakkaat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.YritysNimi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YritysNimi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YhteysHenkilö)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YhteysHenkilö)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Puhelin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Puhelin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sähköposti)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sähköposti)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AsiakasID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

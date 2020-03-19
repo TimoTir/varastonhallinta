@@ -1,0 +1,50 @@
+﻿@model varastonhallinta1.Models.VarastoSaldot
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VarastoSaldot</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tuotemerkki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tuotemerkki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Määrä)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Määrä)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VarastoPaikka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VarastoPaikka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tuotteet.TuoteMerkki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tuotteet.TuoteMerkki)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VarastoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

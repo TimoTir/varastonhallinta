@@ -11,14 +11,21 @@ namespace varastonhallinta1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Logins
     {
+
+
+        
         public int LoginID { get; set; }
         public string Käyttäjätunnus { get; set; }
         public string Salasana { get; set; }
         public Nullable<int> HenkilöID { get; set; }
-    
+
+
+
         public virtual Henkilöstö Henkilöstö { get; set; }
+
     }
 }

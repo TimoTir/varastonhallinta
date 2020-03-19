@@ -11,9 +11,11 @@ namespace varastonhallinta1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Henkilöstö
     {
+        [Key]
         public int HenkilöID { get; set; }
         public string Etunimi { get; set; }
         public string Sukunimi { get; set; }

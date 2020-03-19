@@ -4,13 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+  <h2>Index</h2>
 
-<p>
+   <p>
     @Html.ActionLink("Create New", "Create")
-</p>
+   </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HenkilöID)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Etunimi)
         </th>
@@ -32,32 +35,35 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+ @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Etunimi)
+        @Html.DisplayFor(modelItem => item.HenkilöID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Sukunimi)
+        @Html.DisplayFor(modelItem => item.Etunimi)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Puhelin)
+        @Html.DisplayFor(modelItem => item.Sukunimi)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Sähköposti)
+        @Html.DisplayFor(modelItem => item.Puhelin)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Roolit.Roolinimi)
+        @Html.DisplayFor(modelItem => item.Sähköposti)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Logins.Käyttäjätunnus)
+        @Html.DisplayFor(modelItem => item.Roolit.Roolinimi)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.HenkilöID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.HenkilöID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.HenkilöID })
+        @Html.DisplayFor(modelItem => item.Logins.Käyttäjätunnus)
+        </td>
+        <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.HenkilöID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.HenkilöID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.HenkilöID })
         </td>
     </tr>
-}
+  }
 
 </table>
