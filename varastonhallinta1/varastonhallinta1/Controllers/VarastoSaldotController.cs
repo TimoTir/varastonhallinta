@@ -15,10 +15,11 @@ namespace varastonhallinta1.Controllers
         private naytto1Entities1 db = new naytto1Entities1();
 
         // GET: VarastoSaldot
-        public ActionResult Index()
+        public ActionResult Index(string searching)
         {
-            var varastoSaldot = db.VarastoSaldot.Include(v => v.Tuotteet);
-            return View(varastoSaldot.ToList());
+            //var varastoSaldot = db.VarastoSaldot.Include(v => v.Tuotteet);
+            //return View(varastoSaldot.ToList());
+            return View(db.VarastoSaldot.Where(x => x.Tuotemerkki.Contains(searching) || searching == null).ToList());
         }
 
         // GET: VarastoSaldot/Details/5
