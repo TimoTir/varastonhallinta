@@ -16,7 +16,7 @@
     @Html.TextBox("searching")
     <input type="submit" value="Search" />
 }
-<table class="table table-striped">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
@@ -35,7 +35,7 @@
                 @Html.DisplayNameFor(model => model.Määrä)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TuoteLuokittelu.LuokitteluID)
+                @Html.DisplayNameFor(model => model.TuoteLuokittelu.TuoteLuokka)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.VastanottoPvm)
@@ -80,7 +80,7 @@
                         @Html.DisplayFor(modelItem => item.Määrä)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.TuoteLuokittelu.LuokitteluID)
+                        @Html.DisplayFor(modelItem => item.TuoteLuokittelu.TuoteLuokka)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.VastanottoPvm)

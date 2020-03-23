@@ -19,7 +19,11 @@ namespace varastonhallinta1.Controllers
         {
             //var tuotteet = db.Tuotteet.Include(t => t.Toimittajat);
             //return View(tuotteet.ToList());
-            return View(db.Tuotteet.Where(x => x.TuoteMerkki.Contains(searching) || searching == null).ToList());
+            return View(db.Tuotteet.Where(x => x.TuoteMerkki.Contains(searching) ||
+            x.TuoteMalli.Contains(searching) ||
+            x.Sarjanumero.Contains(searching)||
+            x.Toimittajat.YritysNmi.Contains(searching) ||
+            searching == null).ToList());
         }
 
         // GET: Tuotteet/Details/5
@@ -41,6 +45,7 @@ namespace varastonhallinta1.Controllers
         public ActionResult Create()
         {
             ViewBag.ToimittajaID = new SelectList(db.Toimittajat, "ToimittajaID", "YritysNmi");
+            ViewBag.LuokitteluID = new SelectList(db.TuoteLuokittelu, "LuokitteluID", "TuoteLuokat");
             return View();
         }
 
@@ -49,7 +54,7 @@ namespace varastonhallinta1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TuoteID,TuoteMerkki,TuoteMalli,Sarjanumero,Määrä,ToimittajaID,Tuoteluokittelu,VastanottoPvm")] Tuotteet tuotteet)
+        public ActionResult Create([Bind(Include = "TuoteID,TuoteMerkki,TuoteMalli,Sarjanumero,Määrä,ToimittajaID,TuoteLuokat,VastanottoPvm")] Tuotteet tuotteet)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +88,7 @@ namespace varastonhallinta1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TuoteID,TuoteNimi,TuoteMalli,Sarjanumero,Määrä,ToimittajaID,TuoteLuokittelu,VastanottoPvm")] Tuotteet tuotteet)
+        public ActionResult Edit([Bind(Include = "TuoteID,TuoteNimi,TuoteMalli,Sarjanumero,Määrä,ToimittajaID,TuoteLuokat,VastanottoPvm")] Tuotteet tuotteet)
         {
             if (ModelState.IsValid)
             {
